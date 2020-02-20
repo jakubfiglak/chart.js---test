@@ -12,5 +12,8 @@
   "devDependencies": {
     "parcel-bundler": "^1.12.4",
     "sass": "^1.25.0"
+  },
+  "dependencies": {
+    "chart.js": "^2.9.3"
   }
 }

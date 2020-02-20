@@ -84,4 +84,10 @@ p {
   font-size: 1.4rem;
 }
 
+.chart-container {
+  width: 400px;
+  height: 400px;
+  margin: 50px auto;
+}
+
 /*# sourceMappingURL=/main.77bb5cfd.css.map */
