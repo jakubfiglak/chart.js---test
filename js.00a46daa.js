@@ -20888,15 +20888,29 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var canvas = document.querySelector('#myChart');
 var ctx = canvas.getContext('2d');
 _chart.default.defaults.global.elements.line.fill = false;
+var args = Array.from({
+  length: 11
+}, function (v, k) {
+  return k - 5;
+});
+console.log(args);
+var values = args.map(function (arg) {
+  return Math.pow(arg, 2);
+});
+console.log(values);
+var label = 'test';
 var data = {
-  labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+  labels: args,
   datasets: [{
-    label: 'x^2',
-    data: [1, 4, 9, 16, 25, 36, 49, 64, 81, 100],
+    label: label,
+    data: values,
     borderColor: '#f27a54'
   }]
 };
 var options = {
+  tooltips: {
+    mode: 'x'
+  },
   scales: {
     yAxes: [{
       stacked: true
@@ -20936,7 +20950,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60800" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53258" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
