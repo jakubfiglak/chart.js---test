@@ -85,9 +85,44 @@ p {
 }
 
 .chart-container {
-  width: 400px;
-  height: 400px;
+  width: 50%;
   margin: 50px auto;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+  padding: 3rem;
+  border-radius: 2rem;
+}
+.chart-container .chart {
+  margin: auto;
+}
+
+.options {
+  background: #3c444c;
+  width: 80%;
+  margin: auto;
+  border-radius: 2rem;
+  padding: 2rem;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.options .poly {
+  font-size: 2rem;
+  margin: 2rem 0;
+}
+.options .poly .number {
+  font-size: 2rem;
+  font-family: "Montserrat", sans-serif;
+  color: #30363d;
+  background: #cbcfd4;
+  border: 0;
+  width: 10rem;
+  padding: 1rem;
+  border-radius: 1rem;
+}
+.options .poly .number:focus {
+  outline: 0;
 }
 
 /*# sourceMappingURL=/main.77bb5cfd.css.map */

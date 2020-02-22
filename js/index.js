@@ -5,18 +5,27 @@ const ctx = canvas.getContext('2d');
 
 Chart.defaults.global.elements.line.fill = false;
 
+const args = Array.from({ length: 11 }, (v, k) => k - 5);
+console.log(args);
+const values = args.map(arg => arg ** 2);
+console.log(values);
+const label = 'test';
+
 const data = {
-  labels: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+  labels: args,
   datasets: [
     {
-      label: 'x^2',
-      data: [1, 4, 9, 16, 25, 36, 49, 64, 81, 100],
+      label,
+      data: values,
       borderColor: '#f27a54',
     },
   ],
 };
 
 const options = {
+  tooltips: {
+    mode: 'x',
+  },
   scales: {
     yAxes: [
       {
