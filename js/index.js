@@ -6,8 +6,8 @@ const ctx = canvas.getContext('2d');
 Chart.defaults.global.elements.line.fill = false;
 
 const args = Array.from({ length: 11 }, (v, k) => k - 5);
-const values = args.map(arg => arg ** 2);
-const label = 'x^2';
+const values = [];
+const label = '';
 
 const data = {
   labels: args,
@@ -52,14 +52,33 @@ function calculatePolynominal(argums, coeffs) {
   );
 }
 
+function generateLabel(coeffs) {
+  const coeffsX = coeffs.map((coeff, idx) => {
+    if (coeffs.length - idx - 1 === 0) {
+      return `${coeff}`;
+    }
+    if (coeffs.length - idx - 1 === 1) {
+      return 'x';
+    }
+    return `${coeff}*x^${coeffs.length - idx - 1}`;
+  });
+  return `f(x) = ${coeffsX.join(' + ')}`;
+}
+
 function drawChart(e) {
   e.preventDefault();
 
-  const coeffs = Array.from(coeffInputs).map(input => parseInt(input.value));
+  const coeffs = Array.from(coeffInputs).map(input => parseFloat(input.value));
 
   const newValues = calculatePolynominal(args, coeffs);
 
-  myChart.data.datasets[0].data = newValues;
+  const newLabel = generateLabel(coeffs);
+
+  myChart.data.datasets[0] = {
+    data: newValues,
+    label: newLabel,
+    borderColor: '#f27a54',
+  };
   myChart.update({
     duration: 800,
     easing: 'easeOutBounce',
