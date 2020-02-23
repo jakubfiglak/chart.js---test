@@ -41,6 +41,9 @@ const myChart = new Chart(ctx, {
 
 const coeffInputs = document.querySelectorAll('.number');
 const polyForm = document.querySelector('#poly');
+const colorInput = document.querySelector('#color');
+const minInput = document.querySelector('#min');
+const maxInput = document.querySelector('#max');
 
 function calculatePolynominal(argums, coeffs) {
   return argums.map(
@@ -65,19 +68,29 @@ function generateLabel(coeffs) {
   return `f(x) = ${coeffsX.join(' + ')}`;
 }
 
+function generateArguments(min, max) {
+  return Array.from({ length: max - min + 1 }, (v, k) => k + min);
+}
+
 function drawChart(e) {
   e.preventDefault();
 
+  const min = parseInt(minInput.value);
+  const max = parseInt(maxInput.value);
+  const newArgs = generateArguments(min, max);
+
   const coeffs = Array.from(coeffInputs).map(input => parseFloat(input.value));
 
-  const newValues = calculatePolynominal(args, coeffs);
+  const newValues = calculatePolynominal(newArgs, coeffs);
 
   const newLabel = generateLabel(coeffs);
+
+  myChart.data.labels = newArgs;
 
   myChart.data.datasets[0] = {
     data: newValues,
     label: newLabel,
-    borderColor: '#f27a54',
+    borderColor: `${colorInput.value}`,
   };
 
   myChart.update({
