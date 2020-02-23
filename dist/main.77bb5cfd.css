@@ -133,5 +133,35 @@ p {
 .options .poly .equation .number:focus {
   outline: 0;
 }
+.options .setup {
+  margin: 2rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.options .setup .label {
+  font-size: 1.5rem;
+}
+.options .setup .range {
+  font-size: 2rem;
+  font-family: "Montserrat", sans-serif;
+  color: #30363d;
+  background: #cbcfd4;
+  text-align: right;
+  border: 0;
+  width: 10rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
+  margin: 0 1rem;
+}
+.options .setup .color {
+  border: 0;
+  outline: 0;
+  background: none;
+  width: 6rem;
+  height: 3rem;
+  margin: 0 1rem;
+}
 
 /*# sourceMappingURL=/main.77bb5cfd.css.map */

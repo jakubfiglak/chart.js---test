@@ -79,6 +79,7 @@ function drawChart(e) {
     label: newLabel,
     borderColor: '#f27a54',
   };
+
   myChart.update({
     duration: 800,
     easing: 'easeOutBounce',
