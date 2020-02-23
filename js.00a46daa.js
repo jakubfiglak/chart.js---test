@@ -20893,12 +20893,10 @@ var args = Array.from({
 }, function (v, k) {
   return k - 5;
 });
-console.log(args);
 var values = args.map(function (arg) {
   return Math.pow(arg, 2);
 });
-console.log(values);
-var label = 'test';
+var label = 'x^2';
 var data = {
   labels: args,
   datasets: [{
@@ -20922,6 +20920,33 @@ var myChart = new _chart.default(ctx, {
   data: data,
   options: options
 });
+var coeffInputs = document.querySelectorAll('.number');
+var polyForm = document.querySelector('#poly');
+
+function calculatePolynominal(argums, coeffs) {
+  return argums.map(function (arg) {
+    return coeffs.map(function (coeff, idx) {
+      return coeff * Math.pow(arg, coeffs.length - idx - 1);
+    }).reduce(function (prev, curr) {
+      return prev + curr;
+    });
+  }, 0);
+}
+
+function drawChart(e) {
+  e.preventDefault();
+  var coeffs = Array.from(coeffInputs).map(function (input) {
+    return parseInt(input.value);
+  });
+  var newValues = calculatePolynominal(args, coeffs);
+  myChart.data.datasets[0].data = newValues;
+  myChart.update({
+    duration: 800,
+    easing: 'easeOutBounce'
+  });
+}
+
+polyForm.addEventListener('submit', drawChart);
 },{"chart.js":"node_modules/chart.js/dist/Chart.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
@@ -20950,7 +20975,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53258" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56760" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

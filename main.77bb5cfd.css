@@ -11,6 +11,7 @@
   border-radius: 20px;
   cursor: pointer;
   transition: opacity 0.2s;
+  box-shadow: 0px 2px 4px rgba(242, 122, 84, 0.7);
 }
 .btn-primary {
   background: linear-gradient(90deg, #f27a54 0%, #a154f2 100%);
@@ -96,32 +97,40 @@ p {
 }
 
 .options {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background: #3c444c;
   width: 80%;
   margin: auto;
   border-radius: 2rem;
   padding: 2rem;
   box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+}
+.options .poly {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.options .poly {
+.options .poly .equation {
   font-size: 2rem;
   margin: 2rem 0;
 }
-.options .poly .number {
+.options .poly .equation .number {
   font-size: 2rem;
   font-family: "Montserrat", sans-serif;
   color: #30363d;
   background: #cbcfd4;
+  text-align: right;
   border: 0;
   width: 10rem;
   padding: 1rem;
   border-radius: 1rem;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.5);
 }
-.options .poly .number:focus {
+.options .poly .equation .number:focus {
   outline: 0;
 }
 
