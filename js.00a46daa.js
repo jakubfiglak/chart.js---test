@@ -20893,10 +20893,8 @@ var args = Array.from({
 }, function (v, k) {
   return k - 5;
 });
-var values = args.map(function (arg) {
-  return Math.pow(arg, 2);
-});
-var label = 'x^2';
+var values = [];
+var label = '';
 var data = {
   labels: args,
   datasets: [{
@@ -20933,13 +20931,33 @@ function calculatePolynominal(argums, coeffs) {
   }, 0);
 }
 
+function generateLabel(coeffs) {
+  var coeffsX = coeffs.map(function (coeff, idx) {
+    if (coeffs.length - idx - 1 === 0) {
+      return "".concat(coeff);
+    }
+
+    if (coeffs.length - idx - 1 === 1) {
+      return 'x';
+    }
+
+    return "".concat(coeff, "*x^").concat(coeffs.length - idx - 1);
+  });
+  return "f(x) = ".concat(coeffsX.join(' + '));
+}
+
 function drawChart(e) {
   e.preventDefault();
   var coeffs = Array.from(coeffInputs).map(function (input) {
-    return parseInt(input.value);
+    return parseFloat(input.value);
   });
   var newValues = calculatePolynominal(args, coeffs);
-  myChart.data.datasets[0].data = newValues;
+  var newLabel = generateLabel(coeffs);
+  myChart.data.datasets[0] = {
+    data: newValues,
+    label: newLabel,
+    borderColor: '#f27a54'
+  };
   myChart.update({
     duration: 800,
     easing: 'easeOutBounce'
