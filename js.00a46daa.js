@@ -20920,6 +20920,9 @@ var myChart = new _chart.default(ctx, {
 });
 var coeffInputs = document.querySelectorAll('.number');
 var polyForm = document.querySelector('#poly');
+var colorInput = document.querySelector('#color');
+var minInput = document.querySelector('#min');
+var maxInput = document.querySelector('#max');
 
 function calculatePolynominal(argums, coeffs) {
   return argums.map(function (arg) {
@@ -20946,17 +20949,29 @@ function generateLabel(coeffs) {
   return "f(x) = ".concat(coeffsX.join(' + '));
 }
 
+function generateArguments(min, max) {
+  return Array.from({
+    length: max - min + 1
+  }, function (v, k) {
+    return k + min;
+  });
+}
+
 function drawChart(e) {
   e.preventDefault();
+  var min = parseInt(minInput.value);
+  var max = parseInt(maxInput.value);
+  var newArgs = generateArguments(min, max);
   var coeffs = Array.from(coeffInputs).map(function (input) {
     return parseFloat(input.value);
   });
-  var newValues = calculatePolynominal(args, coeffs);
+  var newValues = calculatePolynominal(newArgs, coeffs);
   var newLabel = generateLabel(coeffs);
+  myChart.data.labels = newArgs;
   myChart.data.datasets[0] = {
     data: newValues,
     label: newLabel,
-    borderColor: '#f27a54'
+    borderColor: "".concat(colorInput.value)
   };
   myChart.update({
     duration: 800,
