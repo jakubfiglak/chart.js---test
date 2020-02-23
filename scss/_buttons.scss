@@ -10,6 +10,7 @@
   border-radius: 20px;
   cursor: pointer;
   transition: opacity 0.2s;
+  box-shadow: 0px 2px 4px $primary-color-transparent;
 
   &-primary {
     background: $primary-gradient;

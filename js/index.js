@@ -6,10 +6,8 @@ const ctx = canvas.getContext('2d');
 Chart.defaults.global.elements.line.fill = false;
 
 const args = Array.from({ length: 11 }, (v, k) => k - 5);
-console.log(args);
 const values = args.map(arg => arg ** 2);
-console.log(values);
-const label = 'test';
+const label = 'x^2';
 
 const data = {
   labels: args,
@@ -40,3 +38,32 @@ const myChart = new Chart(ctx, {
   data,
   options,
 });
+
+const coeffInputs = document.querySelectorAll('.number');
+const polyForm = document.querySelector('#poly');
+
+function calculatePolynominal(argums, coeffs) {
+  return argums.map(
+    arg =>
+      coeffs
+        .map((coeff, idx) => coeff * arg ** (coeffs.length - idx - 1))
+        .reduce((prev, curr) => prev + curr),
+    0
+  );
+}
+
+function drawChart(e) {
+  e.preventDefault();
+
+  const coeffs = Array.from(coeffInputs).map(input => parseInt(input.value));
+
+  const newValues = calculatePolynominal(args, coeffs);
+
+  myChart.data.datasets[0].data = newValues;
+  myChart.update({
+    duration: 800,
+    easing: 'easeOutBounce',
+  });
+}
+
+polyForm.addEventListener('submit', drawChart);

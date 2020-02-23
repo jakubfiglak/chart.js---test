@@ -14,49 +14,60 @@
     </div>
     <div class="options">
       <h3>Set the polynominal equation</h3>
-      <p class="poly">
-        <var>f(x)</var>
-        =
+      <form class="poly" id="poly">
+        <p class="equation">
+          <var>f(x)</var>
+          =
+          <input
+            type="number"
+            name="a"
+            id="a"
+            class="number"
+            step="0.1"
+            value="1"
+            required
+          />
+          <var>x<sup>3</sup></var>
+          +
+          <input
+            type="number"
+            name="b"
+            id="b"
+            class="number"
+            step="0.1"
+            value="1"
+            required
+          />
+          <var>x<sup>2</sup></var>
+          +
+          <input
+            type="number"
+            name="c"
+            id="c"
+            class="number"
+            step="0.1"
+            value="1"
+            required
+          />
+          <var>x</var>
+          +
+          <input
+            type="number"
+            name="d"
+            id="d"
+            class="number"
+            step="0.1"
+            value="1"
+            required
+          />
+        </p>
         <input
-          type="number"
-          name="a"
-          id="a"
-          class="number"
-          step="0.1"
-          required
+          type="submit"
+          class="btn btn-primary"
+          value="Draw a Chart"
+          id="draw"
         />
-        <var>x<sup>3</sup></var>
-        +
-        <input
-          type="number"
-          name="b"
-          id="b"
-          class="number"
-          step="0.1"
-          required
-        />
-        <var>x<sup>2</sup></var>
-        +
-        <input
-          type="number"
-          name="c"
-          id="c"
-          class="number"
-          step="0.1"
-          required
-        />
-        <var>x</var>
-        +
-        <input
-          type="number"
-          name="d"
-          id="d"
-          class="number"
-          step="0.1"
-          required
-        />
-      </p>
-      <button class="btn btn-primary">Chart Draw</button>
+      </form>
     </div>
   </body>
 </html>
