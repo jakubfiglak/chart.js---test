@@ -20920,21 +20920,15 @@ function chartInit() {
     }
   });
 }
-},{"chart.js":"node_modules/chart.js/dist/Chart.js"}],"js/index.js":[function(require,module,exports) {
+},{"chart.js":"node_modules/chart.js/dist/Chart.js"}],"js/calcPolynominal.js":[function(require,module,exports) {
 "use strict";
 
-var _chartInit = _interopRequireDefault(require("./chartInit"));
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = calcPolynominal;
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var coeffInputs = document.querySelectorAll('.number');
-var polyForm = document.querySelector('#poly');
-var colorInput = document.querySelector('#color');
-var minInput = document.querySelector('#min');
-var maxInput = document.querySelector('#max');
-var myChart = (0, _chartInit.default)();
-
-function calculatePolynominal(argums, coeffs) {
+function calcPolynominal(argums, coeffs) {
   return argums.map(function (arg) {
     return coeffs.map(function (coeff, idx) {
       return coeff * Math.pow(arg, coeffs.length - idx - 1);
@@ -20943,6 +20937,14 @@ function calculatePolynominal(argums, coeffs) {
     });
   }, 0);
 }
+},{}],"js/chartHelpers.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.generateLabel = generateLabel;
+exports.generateArguments = generateArguments;
 
 function generateLabel(coeffs) {
   var coeffsX = coeffs.map(function (coeff, idx) {
@@ -20966,17 +20968,34 @@ function generateArguments(min, max) {
     return k + min;
   });
 }
+},{}],"js/index.js":[function(require,module,exports) {
+"use strict";
+
+var _chartInit = _interopRequireDefault(require("./chartInit"));
+
+var _calcPolynominal = _interopRequireDefault(require("./calcPolynominal"));
+
+var _chartHelpers = require("./chartHelpers");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var coeffInputs = document.querySelectorAll('.number');
+var polyForm = document.querySelector('#poly');
+var colorInput = document.querySelector('#color');
+var minInput = document.querySelector('#min');
+var maxInput = document.querySelector('#max');
+var myChart = (0, _chartInit.default)();
 
 function drawChart(e) {
   e.preventDefault();
   var min = parseInt(minInput.value);
   var max = parseInt(maxInput.value);
-  var newArgs = generateArguments(min, max);
+  var newArgs = (0, _chartHelpers.generateArguments)(min, max);
   var coeffs = Array.from(coeffInputs).map(function (input) {
     return parseFloat(input.value);
   });
-  var newValues = calculatePolynominal(newArgs, coeffs);
-  var newLabel = generateLabel(coeffs);
+  var newValues = (0, _calcPolynominal.default)(newArgs, coeffs);
+  var newLabel = (0, _chartHelpers.generateLabel)(coeffs);
   myChart.data.labels = newArgs;
   myChart.data.datasets[0] = {
     data: newValues,
@@ -20990,7 +21009,7 @@ function drawChart(e) {
 }
 
 polyForm.addEventListener('submit', drawChart);
-},{"./chartInit":"js/chartInit.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./chartInit":"js/chartInit.js","./calcPolynominal":"js/calcPolynominal.js","./chartHelpers":"js/chartHelpers.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
