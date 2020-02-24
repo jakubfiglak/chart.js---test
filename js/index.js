@@ -1,49 +1,12 @@
-import Chart from 'chart.js';
-
-const canvas = document.querySelector('#myChart');
-const ctx = canvas.getContext('2d');
-
-Chart.defaults.global.elements.line.fill = false;
-
-const args = Array.from({ length: 11 }, (v, k) => k - 5);
-const values = [];
-const label = '';
-
-const data = {
-  labels: args,
-  datasets: [
-    {
-      label,
-      data: values,
-      borderColor: '#f27a54',
-    },
-  ],
-};
-
-const options = {
-  tooltips: {
-    mode: 'x',
-  },
-  scales: {
-    yAxes: [
-      {
-        stacked: true,
-      },
-    ],
-  },
-};
-
-const myChart = new Chart(ctx, {
-  type: 'line',
-  data,
-  options,
-});
+import chartInit from './chartInit';
 
 const coeffInputs = document.querySelectorAll('.number');
 const polyForm = document.querySelector('#poly');
 const colorInput = document.querySelector('#color');
 const minInput = document.querySelector('#min');
 const maxInput = document.querySelector('#max');
+
+const myChart = chartInit();
 
 function calculatePolynominal(argums, coeffs) {
   return argums.map(
@@ -61,7 +24,7 @@ function generateLabel(coeffs) {
       return `${coeff}`;
     }
     if (coeffs.length - idx - 1 === 1) {
-      return 'x';
+      return `${coeff}x`;
     }
     return `${coeff}*x^${coeffs.length - idx - 1}`;
   });
