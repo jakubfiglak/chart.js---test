@@ -20878,8 +20878,13 @@ return src;
 
 })));
 
-},{"moment":"node_modules/moment/moment.js"}],"js/index.js":[function(require,module,exports) {
+},{"moment":"node_modules/moment/moment.js"}],"js/chartInit.js":[function(require,module,exports) {
 "use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = chartInit;
 
 var _chart = _interopRequireDefault(require("chart.js"));
 
@@ -20888,41 +20893,46 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var canvas = document.querySelector('#myChart');
 var ctx = canvas.getContext('2d');
 _chart.default.defaults.global.elements.line.fill = false;
-var args = Array.from({
-  length: 11
-}, function (v, k) {
-  return k - 5;
-});
-var values = [];
-var label = '';
-var data = {
-  labels: args,
-  datasets: [{
-    label: label,
-    data: values,
-    borderColor: '#f27a54'
-  }]
-};
-var options = {
-  tooltips: {
-    mode: 'x'
-  },
-  scales: {
-    yAxes: [{
-      stacked: true
-    }]
-  }
-};
-var myChart = new _chart.default(ctx, {
-  type: 'line',
-  data: data,
-  options: options
-});
+
+function chartInit() {
+  return new _chart.default(ctx, {
+    type: 'line',
+    data: {
+      labels: Array.from({
+        length: 11
+      }, function (v, k) {
+        return k - 5;
+      }),
+      datasets: [{
+        label: '',
+        data: []
+      }]
+    },
+    options: {
+      tooltips: {
+        mode: 'x'
+      },
+      scales: {
+        yAxes: [{
+          stacked: true
+        }]
+      }
+    }
+  });
+}
+},{"chart.js":"node_modules/chart.js/dist/Chart.js"}],"js/index.js":[function(require,module,exports) {
+"use strict";
+
+var _chartInit = _interopRequireDefault(require("./chartInit"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var coeffInputs = document.querySelectorAll('.number');
 var polyForm = document.querySelector('#poly');
 var colorInput = document.querySelector('#color');
 var minInput = document.querySelector('#min');
 var maxInput = document.querySelector('#max');
+var myChart = (0, _chartInit.default)();
 
 function calculatePolynominal(argums, coeffs) {
   return argums.map(function (arg) {
@@ -20941,7 +20951,7 @@ function generateLabel(coeffs) {
     }
 
     if (coeffs.length - idx - 1 === 1) {
-      return 'x';
+      return "".concat(coeff, "x");
     }
 
     return "".concat(coeff, "*x^").concat(coeffs.length - idx - 1);
@@ -20980,7 +20990,7 @@ function drawChart(e) {
 }
 
 polyForm.addEventListener('submit', drawChart);
-},{"chart.js":"node_modules/chart.js/dist/Chart.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./chartInit":"js/chartInit.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -21008,7 +21018,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56760" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58085" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
