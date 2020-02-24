@@ -1,4 +1,6 @@
 import chartInit from './chartInit';
+import calcPolynominal from './calcPolynominal';
+import { generateLabel, generateArguments } from './chartHelpers';
 
 const coeffInputs = document.querySelectorAll('.number');
 const polyForm = document.querySelector('#poly');
@@ -7,33 +9,6 @@ const minInput = document.querySelector('#min');
 const maxInput = document.querySelector('#max');
 
 const myChart = chartInit();
-
-function calculatePolynominal(argums, coeffs) {
-  return argums.map(
-    arg =>
-      coeffs
-        .map((coeff, idx) => coeff * arg ** (coeffs.length - idx - 1))
-        .reduce((prev, curr) => prev + curr),
-    0
-  );
-}
-
-function generateLabel(coeffs) {
-  const coeffsX = coeffs.map((coeff, idx) => {
-    if (coeffs.length - idx - 1 === 0) {
-      return `${coeff}`;
-    }
-    if (coeffs.length - idx - 1 === 1) {
-      return `${coeff}x`;
-    }
-    return `${coeff}*x^${coeffs.length - idx - 1}`;
-  });
-  return `f(x) = ${coeffsX.join(' + ')}`;
-}
-
-function generateArguments(min, max) {
-  return Array.from({ length: max - min + 1 }, (v, k) => k + min);
-}
 
 function drawChart(e) {
   e.preventDefault();
@@ -44,7 +19,7 @@ function drawChart(e) {
 
   const coeffs = Array.from(coeffInputs).map(input => parseFloat(input.value));
 
-  const newValues = calculatePolynominal(newArgs, coeffs);
+  const newValues = calcPolynominal(newArgs, coeffs);
 
   const newLabel = generateLabel(coeffs);
 
